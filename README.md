@@ -12,4 +12,4 @@ It implements vector math, materials, lighting simulation, and image output to P
 - Image output saved as .png files
 
 
-Ray → Scene → Objects → Material → Color Output
+### Ray → Scene → Objects → Material → Color Output
