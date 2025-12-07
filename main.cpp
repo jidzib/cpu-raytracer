@@ -5,40 +5,38 @@
 #include "Camera.h"
 #include "Ray.h"
 #include "Sphere.h"
+#include "Utilities.h"
 #include <iostream>
-
-Vec3 ray_color(Ray r, Sphere s)
-{
-	auto t = s.intersect(r);
-	if (t)
-	{
-		Vec3 hit = r.at(*t);
-		Vec3 normal = (hit - s.center).normalized();
-		return Vec3(0.5 * (normal.x + 1), 0.5 * (normal.y + 1), 0.5 * (normal.z + 1));
-	}
-	Vec3 unit_dir = r.direction.normalized();
-	double a = 0.5 * (unit_dir.y + 1.0);
-	return (Vec3(1, 1, 1) * (1 - a) + Vec3(0.5, 0.7, 1.0) * (a));
-}
+#include <vector>
 
 int main() {
 
-	Sphere sphere(Vec3(0, 0, -5), 1);
+	std::vector<Sphere> world;
 
-	double WIDTH = 1920;
-	double HEIGHT = 1080;
+	Sphere sphere1(Vec3(0, 0, -5), 1);
+	Sphere sphere2(Vec3(2, 0, -3), 1);
+	Sphere sphere3(Vec3(-2, 2, -4), 1);
+
+	world.push_back(sphere1);
+	world.push_back(sphere2);
+	world.push_back(sphere3);
+
+	double WIDTH = 720;
+	double HEIGHT = 480;
+	double aspect_ratio = WIDTH / HEIGHT;
 
 	unsigned char* pixels = new unsigned char[WIDTH * HEIGHT * 3];
 	Vec3 cameraPos(0, 0, 0);
 
-	double viewport_height = 2.0;
-	double viewport_width = 2.0 * (WIDTH / HEIGHT); // <-- floating point division
-	double focal_length    = 1.0;
+	double viewport_height = 1.0;
+	double viewport_width = aspect_ratio * viewport_height; // <-- floating point division
+	double focal_length = 1.0;
 
 	Vec3 horizontal(viewport_width, 0, 0);    // X axis
 	Vec3 vertical(0, viewport_height, 0);     // Y axis
 
 	Vec3 lower_left = cameraPos - horizontal / 2.0 - vertical / 2.0 - Vec3(0, 0, focal_length);
+	int samples_per_pixel = 10;
 
 	for (int row = 0; row < HEIGHT; ++row) {
 		for (int col = 0; col < WIDTH; ++col) {
@@ -49,20 +47,19 @@ int main() {
 			Vec3 ray_direction = pixel_position - cameraPos;
 			Ray r(cameraPos, ray_direction);
 
+			Vec3 pixel_color(0, 0, 0);
+			for (int sample = 0; sample < samples_per_pixel; sample++)
+			{
+				pixel_color = pixel_color + ray_color(r, world);
+			}
 
-			Vec3 pixel_color = ray_color(r, sphere);
 			int index = (row * WIDTH + col) * 3;
-			auto clamp = [](double x) {
-				if (x < 0.0) return 0.0;
-				if (x > 1.0) return 1.0;
-				return x;
-				};
 
-			pixels[index + 0] = static_cast<unsigned char>(255.999 * clamp(pixel_color.x));
-			pixels[index + 1] = static_cast<unsigned char>(255.999 * clamp(pixel_color.y));
-			pixels[index + 2] = static_cast<unsigned char>(255.999 * clamp(pixel_color.z));
+			pixels[index + 0] = static_cast<unsigned char>(255.999 * clamp(pixel_color.x / samples_per_pixel));
+			pixels[index + 1] = static_cast<unsigned char>(255.999 * clamp(pixel_color.y / samples_per_pixel));
+			pixels[index + 2] = static_cast<unsigned char>(255.999 * clamp(pixel_color.z / samples_per_pixel));
 		}
 	}
-	stbi_write_png("image.png", WIDTH, HEIGHT, 3, pixels, WIDTH*3);
+	stbi_write_png("images/image.png", WIDTH, HEIGHT, 3, pixels, WIDTH*3);
 
 }
