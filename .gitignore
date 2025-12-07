@@ -1,0 +1,25 @@
+# Visual Studio cache
+.ipch/
+*.ipch
+
+# VS symbol databases
+*.VC.db
+*.VC.opendb
+
+
+# VS auto files
+.vs/
+
+# Build directories
+x64/
+Ray trac.eca0d5b3/
+
+# CMake build folders, if any
+out/
+build/
+
+# Backup
+*.sln.ide
+
+# User specfiic project configs
+*.vcxproj.user
