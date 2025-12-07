@@ -1,7 +1,0 @@
-﻿  main.cpp
-C:\Users\Jad\Visual Studio\Ray tracer (no OpenGL)\main.cpp(28,59): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
-C:\Users\Jad\Visual Studio\Ray tracer (no OpenGL)\main.cpp(56,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Jad\Visual Studio\Ray tracer (no OpenGL)\main.cpp(63,68): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Jad\Visual Studio\Ray tracer (no OpenGL)\main.cpp(63,44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Jad\Visual Studio\Ray tracer (no OpenGL)\main.cpp(63,37): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Ray tracer (no OpenGL).vcxproj -> C:\Users\Jad\Visual Studio\Ray tracer (no OpenGL)\x64\Debug\Ray tracer (no OpenGL).exe
