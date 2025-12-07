@@ -1,4 +1,4 @@
-#ifndef SPEHRE_CLASS
+#ifndef SPHERE_CLASS
 #define SPHERE_CLASS
 #include "Vec3.h"
 #include "Ray.h"

@@ -146,6 +146,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Ray.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
+    <ClCompile Include="src\Utilities.cpp" />
     <ClCompile Include="src\Vec3.cpp" />
   </ItemGroup>
   <ItemGroup>

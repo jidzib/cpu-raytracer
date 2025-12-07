@@ -13,7 +13,12 @@ class Vec3
 		Vec3 operator/(double divider);
 		double dot(Vec3 other);
 		Vec3 normalized();
+		Vec3 random();
+		Vec3 random(double min, double max);
+		Vec3 random_unit_vector();
+		double length_squared();
 };
+
 
 #endif
 

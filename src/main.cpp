@@ -13,13 +13,15 @@ int main() {
 
 	std::vector<Sphere> world;
 
-	Sphere sphere1(Vec3(0, 0, -5), 1);
+	Sphere sphere1(Vec3(0, -1, -5), 1);
 	Sphere sphere2(Vec3(2, 0, -3), 1);
 	Sphere sphere3(Vec3(-2, 2, -4), 1);
+	Sphere ground(Vec3(0, -102, -1), 100);
 
 	world.push_back(sphere1);
 	world.push_back(sphere2);
 	world.push_back(sphere3);
+	world.push_back(ground);
 
 	double WIDTH = 720;
 	double HEIGHT = 480;
@@ -37,6 +39,7 @@ int main() {
 
 	Vec3 lower_left = cameraPos - horizontal / 2.0 - vertical / 2.0 - Vec3(0, 0, focal_length);
 	int samples_per_pixel = 10;
+	int max_depth = 50;
 
 	for (int row = 0; row < HEIGHT; ++row) {
 		for (int col = 0; col < WIDTH; ++col) {
@@ -50,7 +53,7 @@ int main() {
 			Vec3 pixel_color(0, 0, 0);
 			for (int sample = 0; sample < samples_per_pixel; sample++)
 			{
-				pixel_color = pixel_color + ray_color(r, world);
+				pixel_color = pixel_color + ray_color(r, world, max_depth);
 			}
 
 			int index = (row * WIDTH + col) * 3;
