@@ -9,7 +9,8 @@ class Sphere
 	public:
 		Vec3 center;
 		double radius;
-		Sphere(Vec3 c, double r);
+		Vec3 albedo;
+		Sphere(Vec3 c, double r, Vec3 color);
 		std::optional<double> intersect(Ray r);
 };
 

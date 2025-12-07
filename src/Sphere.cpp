@@ -1,10 +1,11 @@
 #include "Sphere.h"
 #include <cmath>
 
-Sphere::Sphere(Vec3 c, double r)
+Sphere::Sphere(Vec3 c, double r, Vec3 color)
 {
 	center = c;
 	radius = r;
+	albedo = color;
 }
 
 std::optional<double> Sphere::intersect(Ray r)

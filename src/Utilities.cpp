@@ -6,7 +6,7 @@ Vec3 ray_color(Ray r, std::vector<Sphere> world, int depth)
 		return Vec3(0, 0, 0);
 
 	double closest_t = std::numeric_limits<double>::infinity();
-	const Sphere* hitSphere = nullptr;
+	Sphere* hitSphere = nullptr;
 
 	for (auto& s : world)
 	{
@@ -26,7 +26,9 @@ Vec3 ray_color(Ray r, std::vector<Sphere> world, int depth)
 
 		if (direction.dot(normal) <= 0.0)
 			direction = direction * -1;
-		return ray_color(Ray(hit, direction), world, depth-1) * 0.5;
+		
+		Vec3 light = ray_color(Ray(hit, direction), world, depth - 1);
+		return hitSphere->albedo * light * 0.5;
 	}
 	Vec3 unit_dir = r.direction.normalized();
 	double a = 0.5 * (unit_dir.y + 1.0);

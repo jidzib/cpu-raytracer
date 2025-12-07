@@ -9,6 +9,7 @@ class Vec3
 		Vec3(double, double, double);
 		Vec3 operator+(Vec3 other);
 		Vec3 operator-(Vec3 other);
+		Vec3 operator*(Vec3 other);
 		Vec3 operator*(double scalar);
 		Vec3 operator/(double divider);
 		double dot(Vec3 other);

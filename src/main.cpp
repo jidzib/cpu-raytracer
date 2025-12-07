@@ -13,10 +13,10 @@ int main() {
 
 	std::vector<Sphere> world;
 
-	Sphere sphere1(Vec3(0, -1, -5), 1);
-	Sphere sphere2(Vec3(2, 0, -3), 1);
-	Sphere sphere3(Vec3(-2, 2, -4), 1);
-	Sphere ground(Vec3(0, -102, -1), 100);
+	Sphere sphere1(Vec3(0, -1, -5), 1, Vec3(1, 0, 0));
+	Sphere sphere2(Vec3(2, 0, -3), 1, Vec3(0, 1, 0));
+	Sphere sphere3(Vec3(-2, 2, -4), 1, Vec3(0, 0, 1));
+	Sphere ground(Vec3(0, -102, -1), 100, Vec3(0.5, 0.5, 0.5));
 
 	world.push_back(sphere1);
 	world.push_back(sphere2);
@@ -38,7 +38,7 @@ int main() {
 	Vec3 vertical(0, viewport_height, 0);     // Y axis
 
 	Vec3 lower_left = cameraPos - horizontal / 2.0 - vertical / 2.0 - Vec3(0, 0, focal_length);
-	int samples_per_pixel = 10;
+	int samples_per_pixel = 50;
 	int max_depth = 50;
 
 	for (int row = 0; row < HEIGHT; ++row) {
